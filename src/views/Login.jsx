@@ -48,22 +48,6 @@ const Login = (props) => {
             });
     }
 
- 
-
-    const handleLogout = () => {
-        localStorage.removeItem('user')
-        console.log(handleLogout);
-    }
-
-    const showLogoutBtn = () => {
-        return(
-            props.user ? (
-                <button className="btn" onClick={handleLogout}>Logout</button>
-            ) : null
-        );
-    }
-
-
 
     return (
         <div className="login">
@@ -74,7 +58,6 @@ const Login = (props) => {
                 <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleInputChange} />
                 <button className="btn">Login</button>
             </form>
-            {showLogoutBtn()}
         </div>
     )
 }
