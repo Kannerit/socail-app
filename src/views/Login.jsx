@@ -14,7 +14,7 @@ const Login = (props) => {
 
     const handleInputChange = (e) => {
         const target = e.target;
-        const name = target.name; 
+        const name = target.name;
 
         setFormData({
             ...formData,
@@ -25,46 +25,61 @@ const Login = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-
         axios.post("https://akademia108.pl/api/social-app/user/login", {
-          username: formData.username,
-          password: formData.password
+            username: formData.username,
+            password: formData.password
         })
             .then((res) => {
 
-                if(Array.isArray(res.data.username)) {
+                if (Array.isArray(res.data.username)) {
                     setLoginMessage(res.data.username[0])
-                } else if(Array.isArray(res.data.password)) {
+                } else if (Array.isArray(res.data.password)) {
                     setLoginMessage(res.data.password[0])
                 } else if (res.data.error) {
                     setLoginMessage('Incorrect username or password')
                 } else {
                     setLoginMessage('')
                     props.setUser(res.data);
-                    localStorage.setItem('user', JSON.stringify(res.data)); 
+                    localStorage.setItem('user', JSON.stringify(res.data));
                 }
-
-               
-
             })
             .catch((error) => {
                 console.error(error);
             });
-
     }
+
+ 
+
+    const handleLogout = () => {
+        localStorage.removeItem('user')
+        console.log(handleLogout);
+    }
+
+    const showLogoutBtn = () => {
+        return(
+            props.user ? (
+                <button className="btn" onClick={handleLogout}>Logout</button>
+            ) : null
+        );
+    }
+
 
 
     return (
         <div className="login">
-          {props.user && <Navigate to="/" />}  
+            {props.user && <Navigate to="/" />}
             <form onSubmit={handleSubmit}>
                 {loginMessage && <h2>{loginMessage}</h2>}
                 <input type="text" name="username" placeholder="User name" value={formData.username} onChange={handleInputChange} />
                 <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleInputChange} />
                 <button className="btn">Login</button>
             </form>
+            {showLogoutBtn()}
         </div>
     )
 }
+
+
+
 
 export default Login;

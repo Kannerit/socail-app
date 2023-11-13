@@ -3,7 +3,7 @@ import axios from "axios";
 import Post from "../components/Post";
 import './Home.css'
 
-const Home = () => {
+const Home = (props) => {
 
     const [posts, setPosts] = useState([])
 

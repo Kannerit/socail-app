@@ -2,6 +2,8 @@ import { Link } from "react-router-dom"
 import './AppNav.css'
 
 const AppNav = (props)  => {
+  
+
     return(
         <div className="mainNav">
             <ul>

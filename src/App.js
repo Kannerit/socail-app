@@ -13,7 +13,7 @@ function App() {
 
   return (
     <div className="App">
-      <AppNav user={useRouteError}/>
+      <AppNav user={user}/>
       <AppRoutes user={user} setUser={setUser}/>
     </div>
   );
