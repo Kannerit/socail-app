@@ -17,9 +17,8 @@ const AppNav = (props)  => {
             .catch((error) => {
                 console.error(error);
             });
-    
     }
-    console.log(props);
+   
 
     return(
         <div className="mainNav">
