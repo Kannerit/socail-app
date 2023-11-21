@@ -47,21 +47,37 @@ const Home = (props) => {
             });
     }
 
-    useEffect(() => {
-        getLatestPosts();
-    }, [])
+    const deletePost = (postId) => {
 
-    return (
-        <div className="home">
-            <div className="postList">
-            <AddPost getPrevPosts={getPrevPosts}/>
-                {posts.map((post) => {
-                    return <Post post={post} key={post.id} />
-                })}
-                <button className="btn loadMore" onClick={getNextPosts}>Load more</button>
-            </div>
+        axios.post("https://akademia108.pl/api/social-app/post/delete", {
+            id: postId
+        })
+            .then((req) => {
+              setPosts(posts.filter(post => post.id !== postId));
+           
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
+
+useEffect(() => {
+    getLatestPosts();
+}, [])
+
+
+return (
+    <div className="home">
+        <div className="postList">
+            <AddPost getPrevPosts={getPrevPosts} />
+            {posts.map((post) => {
+                return <Post post={post} key={post.id} />
+            })}
+            <button className="btn loadMore" onClick={getNextPosts}>Load more</button>
         </div>
-    )
-}
+    </div>
+)
+        }
 
 export default Home;

@@ -24,6 +24,9 @@ const Post = (props) => {
                     <div className="likes">
                         {likesCount}
                     </div>
+                    <button className="delete-btn"
+                     onClick={() => props.deletePost(props.post.id)}
+                    >Delete</button>
                 </div>
             </div>
         </div>
