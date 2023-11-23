@@ -24,8 +24,6 @@ const AddPost = (props) => {
     }
 
 
-
-
     return (
         <div className="addPost">
             <form onSubmit={(e) => {

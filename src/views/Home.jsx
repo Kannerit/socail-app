@@ -72,7 +72,7 @@ return (
         <div className="postList">
             <AddPost getPrevPosts={getPrevPosts} />
             {posts.map((post) => {
-                return <Post post={post} key={post.id} />
+                return <Post post={post} key={post.id} deletePost={deletePost} />
             })}
             <button className="btn loadMore" onClick={getNextPosts}>Load more</button>
         </div>
