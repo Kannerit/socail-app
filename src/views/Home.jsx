@@ -47,21 +47,25 @@ const Home = (props) => {
             });
     }
 
-    const deletePost = (postId) => {
+    const deletePost = (id) => {
 
+
+         const userConfirmed = window.confirm("Are you sure you want to delete this post?")
+
+         if (userConfirmed) {
         axios.post("https://akademia108.pl/api/social-app/post/delete", {
-            id: postId
+            post_id: id
         })
-            .then((req) => {
-              setPosts(posts.filter(post => post.id !== postId));
-           
+            .then((res) => {
+                console.log(res);
+              setPosts(posts.filter(post => post.id !== res.data.post_id));
             })
             .catch((error) => {
                 console.error(error);
             });
     }
 
-
+}
 useEffect(() => {
     getLatestPosts();
 }, [])
