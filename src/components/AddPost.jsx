@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import './AddPost.css';
 
 const AddPost = (props) => {
   const [postContent, setPostContent] = useState("");
@@ -22,13 +23,14 @@ const AddPost = (props) => {
 
   return (
     <div className="addPost">
-      <form
+      <form className="addPostForm"
         onSubmit={(e) => {
           e.preventDefault();
           handleAddPost();
         }}
       >
         <textarea
+      
           name="textarea"
           id="textarea"
           cols="30"
@@ -38,7 +40,7 @@ const AddPost = (props) => {
           }}
           value={postContent}
         ></textarea>
-        <button type="submit">Add post</button>
+        <button className="btn" type="submit">Add post</button>
       </form>
     </div>
   );

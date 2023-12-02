@@ -1,42 +1,58 @@
 .post {
-        display: flex;
-        border: 1px solid black;
-        margin: 5px 0;
-        border-radius: 5px;
+  display: flex;
+  border: 1px solid black;
+  margin: 5px 0;
+  border-radius: 5px;
 }
 
 .post > * {
-    padding: 5px;
+  padding: 5px;
 }
 
 .post .avatar img {
-    height: 50px;
-    border-radius: 50%;
+  height: 50px;
+  border-radius: 50%;
 }
 
 .postData {
-    width: 100%;
+  width: 100%;
 }
 
 .post .postData .postMeta {
-    display: flex;
-    padding: 5px;
-    justify-content: space-between;
-    flex-wrap: wrap;
+  display: flex;
+  padding: 5px;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .post .postData .postMeta .author {
-    font-weight: 700;
+  font-weight: 700;
 }
 
 .post .postData .postContent {
-    text-align: left;
-    padding: 5px;
+  text-align: left;
+  padding: 5px;
 }
 
 .post .postData .postMeta .likes {
-    display: flex;
-
-    justify-content: right;
+  display: flex;
+  justify-content: right;
 }
 
+
+.deleteConfirmation {
+    position: fixed;
+    background-color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid black;
+}
+
+.deleteConfirmation .yes {
+    background-color:  rgb(101, 133, 164);
+}
+
+.deleteConfirmation .no {
+    background-color: rgb(101, 133, 164);
+}

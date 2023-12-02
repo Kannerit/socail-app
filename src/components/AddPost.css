@@ -1,0 +1,25 @@
+ .addPostForm {
+    max-width: 600px;
+    margin: auto;
+    padding: 5px;
+    border: 1px solid black;
+    text-align: right;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
+    border-radius: 5px;
+}
+
+
+
+.addPostForm textarea {
+    width: 95%;
+    padding: 10px;
+    resize: vertical;
+    border-radius: 5px;
+}
+
+
+.addPostForm button {
+    align-self: self-end;
+}
