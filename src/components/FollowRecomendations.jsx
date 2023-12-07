@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-
 const FollowRecommendations = (props) => {
   const [recommendations, setRecommendations] = useState([]);
   // // const [doesUserFollow, setDoesUserFollow] = useState(
@@ -14,7 +13,7 @@ const FollowRecommendations = (props) => {
       .post("https://akademia108.pl/api/social-app/follows/recommendations")
 
       .then((res) => {
-        setRecommendations(res.data)
+        setRecommendations(res.data);
       })
       .catch((error) => {
         console.error(error);
@@ -22,16 +21,14 @@ const FollowRecommendations = (props) => {
   };
 
   useEffect(() => {
-    getRecommendations()
+    getRecommendations();
   }, []);
 
-
-
-  const follow = (id, isFollowed) => {
+  const follow = (id) => {
     axios
-      .post("https://akademia108.pl/api/social-app/follows/follow" )
-      
-
+      .post("https://akademia108.pl/api/social-app/follows/follow", {
+        user: id
+  })
       // I used the logic from the "like part"
       // (isFollowed ? "unfollow" : "follow"),
       // {
@@ -46,19 +43,20 @@ const FollowRecommendations = (props) => {
       .catch((error) => {
         console.error(error);
       });
-
-  }
+  };
 
   return (
     <div>
       <ul>
-          {recommendations.map(user => (
-            <li key={user.id}>
-              <div>{user.id}</div>
-              <button onClick={()=> follow()}>Follow</button>
-            </li>
-          ))}
-       </ul>
+        {recommendations.map((user) => (
+          <li key={user.id}>
+            <div>{user.id}</div>
+            <button className="btn" onClick={() => follow(user.id)}>
+              Follow
+            </button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
