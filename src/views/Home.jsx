@@ -3,6 +3,7 @@ import axios from "axios";
 import Post from "../components/Post";
 import "./Home.css";
 import AddPost from "../components/AddPost";
+import FollowRecommendations from "../components/FollowRecomendations";
 
 const Home = (props) => {
   const [posts, setPosts] = useState([]);
@@ -45,15 +46,12 @@ const Home = (props) => {
       });
   };
 
-
-  
   const deletePost = (id) => {
     axios
       .post("https://akademia108.pl/api/social-app/post/delete", {
         post_id: id,
       })
       .then((res) => {
-        console.log(res);
         setPosts(posts.filter((post) => post.id !== res.data.post_id));
       })
       .catch((error) => {
@@ -70,11 +68,19 @@ const Home = (props) => {
       <div className="postList">
         <AddPost getPrevPosts={getPrevPosts} />
         {posts.map((post) => {
-          return <Post post={post} key={post.id} deletePost={deletePost} />;
+          return (
+            <Post
+              post={post}
+              user={props.user}
+              key={post.id}
+              deletePost={deletePost}
+            />
+          );
         })}
         <button className="btn loadMore" onClick={getNextPosts}>
           Load more
         </button>
+        <FollowRecommendations />
       </div>
     </div>
   );

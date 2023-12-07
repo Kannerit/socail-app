@@ -3,13 +3,16 @@ import "./Post.css";
 import axios from "axios";
 
 const Post = (props) => {
+
+
+
   const [likesCount, setLikesCount] = useState(props.post.likes.length);
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
   const [doesUserLike, setdoesUserLike] = useState(
     props.post.likes.filter((like) => like.username === props.user?.username)
       .length !== 0
   );
- 
+
   const likePost = (id, isLiked) => {
     axios
       .post(
@@ -22,8 +25,6 @@ const Post = (props) => {
       .then(() => {
         setLikesCount(likesCount + (isLiked ? -1 : 1));
         setdoesUserLike(!isLiked);
-
-
       });
   };
 
@@ -38,23 +39,22 @@ const Post = (props) => {
           <div className="date">{props.post.created_at.substring(0, 10)}</div>
           <div className="postContent">{props.post.content}</div>
           <div className="likes">
-            
 
-              {/* here */}
-            {/* {props.user && */}
-            <button
-              className="btn"
-              onClick={() => likePost(props.post.id, doesUserLike)}
-            >
-              {doesUserLike ? "Dislike" : "Like"}
-            </button>
-
+            {props.user && (
+              <button
+                className="btn"
+                onClick={() => likePost(props.post.id, doesUserLike)}
+              >
+                {doesUserLike? "Dislike" : "Like"}
+              </button>
+            )}
             {likesCount}
           </div>
-          {/* {props.user.username === props.post.user.username &&  */}
-          <button className="btn" onClick={() => setDeleteModalVisible(true)}>
-            Delete
-          </button>
+          {props.user?.username === props.post.user.username && (
+            <button className="btn" onClick={() => setDeleteModalVisible(true)}>
+              Delete
+            </button>
+          )}
 
           {deleteModalVisible && (
             <div className="deleteConfirmation">
@@ -76,9 +76,7 @@ const Post = (props) => {
         </div>
       </div>
     </div>
-    
   );
-
 };
 
 export default Post;
