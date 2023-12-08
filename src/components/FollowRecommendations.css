@@ -2,15 +2,28 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 5px;
+  justify-content: space-around;
   margin-bottom: 25px;
   text-transform: uppercase; 
   font-size: smaller; 
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.Recommendation {
+  width: 33.33%;
+  color: #003171;
+
+}
+
+.RecHeader{
+margin: 15px;
+color: #003171;
 }
 
 .AvatarImg {
-  height: 150px;
+  height: 120px;
   border: none;
   border-radius: 10%;
 }

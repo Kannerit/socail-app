@@ -21,9 +21,11 @@ const FollowRecommendations = (props) => {
     getRecommendations();
   }, []);
 
-  const follow = () => {
+  const follow = (id) => {
     axios
-      .post("https://akademia108.pl/api/social-app/follows/follow")
+      .post("https://akademia108.pl/api/social-app/follows/follow", {
+        user_id: id
+      })
       .then((res) => {
         console.log(res);
       })
@@ -36,11 +38,11 @@ const FollowRecommendations = (props) => {
 
   return (
     <div className="MainContainer">
-         <h2>Recommendations</h2>
+         <h2 className="RecHeader">Recommendations</h2>
       <div className="Recommendations">
         {recommendations.map((recommendation) => {
           return (
-            <div key={recommendation.id}>
+            <div className="Recommendation" key={recommendation.id}>
               <img src={recommendation.avatar_url} className="AvatarImg" />
               <h3>{recommendation.username}</h3>
               <button className="follow-btn" onClick={()=> follow()}>Follow</button>
