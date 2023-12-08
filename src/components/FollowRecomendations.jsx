@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "./FollowRecommendations.css";
 
 const FollowRecommendations = (props) => {
   const [recommendations, setRecommendations] = useState([]);
-  // // const [doesUserFollow, setDoesUserFollow] = useState(
-  // //   // props.post.user.filter((follow) => follow.username === props.user?.username)
-  // //   //   .length !== 0
-  // );
 
   const getRecommendations = () => {
     axios
@@ -24,39 +21,34 @@ const FollowRecommendations = (props) => {
     getRecommendations();
   }, []);
 
-  const follow = (id) => {
+  const follow = () => {
     axios
-      .post("https://akademia108.pl/api/social-app/follows/follow", {
-        user: id
-  })
-      // I used the logic from the "like part"
-      // (isFollowed ? "unfollow" : "follow"),
-      // {
-      //   user: id,
-      // }
-      // )
-
+      .post("https://akademia108.pl/api/social-app/follows/follow")
       .then((res) => {
         console.log(res);
-        // setDoesUserFollow(!isFollowed);
       })
+
       .catch((error) => {
         console.error(error);
       });
   };
 
+
   return (
-    <div>
-      <ul>
-        {recommendations.map((user) => (
-          <li key={user.id}>
-            <div>{user.id}</div>
-            <button className="btn" onClick={() => follow(user.id)}>
-              Follow
-            </button>
-          </li>
-        ))}
-      </ul>
+    <div className="MainContainer">
+         <h2>Recommendations</h2>
+      <div className="Recommendations">
+        {recommendations.map((recommendation) => {
+          return (
+            <div key={recommendation.id}>
+              <img src={recommendation.avatar_url} className="AvatarImg" />
+              <h3>{recommendation.username}</h3>
+              <button className="follow-btn" onClick={()=> follow()}>Follow</button>
+            </div>
+        
+          );
+        })}
+      </div>
     </div>
   );
 };

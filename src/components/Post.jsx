@@ -13,7 +13,7 @@ const Post = (props) => {
       .length !== 0
   );
 
-  const likePost = (id, isLiked) => {
+  const likePost = (id, isLiked) => { (
     axios
       .post(
         "https://akademia108.pl/api/social-app/post/" +
@@ -25,7 +25,7 @@ const Post = (props) => {
       .then(() => {
         setLikesCount(likesCount + (isLiked ? -1 : 1));
         setdoesUserLike(!isLiked);
-      });
+      }));
   };
 
   return (

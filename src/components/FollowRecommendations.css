@@ -1,0 +1,32 @@
+.Recommendations {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 5px;
+  margin-bottom: 25px;
+  text-transform: uppercase; 
+  font-size: smaller; 
+}
+
+.AvatarImg {
+  height: 150px;
+  border: none;
+  border-radius: 10%;
+}
+
+.follow-btn {
+  background-color: #1d9bf0;
+  cursor: pointer;
+  padding: 10px;
+  border: none;
+  border-radius: 15px;
+  color: white;
+  margin: auto;
+
+}
+
+.follow-btn:hover {
+  background-color: #00538a;
+  cursor: pointer;
+}

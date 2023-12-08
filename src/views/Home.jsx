@@ -66,7 +66,9 @@ const Home = (props) => {
   return (
     <div className="home">
       <div className="postList">
-        <AddPost getPrevPosts={getPrevPosts} />
+    
+        {props.user && <AddPost getPrevPosts={getPrevPosts} />}
+        {props.user && <FollowRecommendations user={props.user} />}
         {posts.map((post) => {
           return (
             <Post
@@ -80,7 +82,7 @@ const Home = (props) => {
         <button className="btn loadMore" onClick={getNextPosts}>
           Load more
         </button>
-        <FollowRecommendations />
+       
       </div>
     </div>
   );
