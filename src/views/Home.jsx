@@ -14,6 +14,7 @@ const Home = (props) => {
 
       .then((req) => {
         setPosts(req.data);
+        console.log(req);
       })
       .catch((error) => {
         console.error(error);
@@ -68,14 +69,15 @@ const Home = (props) => {
       <div className="postList">
     
         {props.user && <AddPost getPrevPosts={getPrevPosts} />}
-        {props.user && <FollowRecommendations user={props.user} />}
+        {props.user && <FollowRecommendations user={props.user}/>}
         {posts.map((post) => {
           return (
-            <Post
+            <Post 
               post={post}
               user={props.user}
               key={post.id}
               deletePost={deletePost}
+              userId={props.user.id}
             />
           );
         })}

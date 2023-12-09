@@ -2,10 +2,8 @@ import { useState } from "react";
 import "./Post.css";
 import axios from "axios";
 
+
 const Post = (props) => {
-
-
-
   const [likesCount, setLikesCount] = useState(props.post.likes.length);
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
   const [doesUserLike, setdoesUserLike] = useState(
@@ -13,7 +11,47 @@ const Post = (props) => {
       .length !== 0
   );
 
-  const likePost = (id, isLiked) => { (
+  const [doesUserFollow, setdoesUserFollow] = useState(true);
+
+  const follow = (id) => {
+    axios
+      .post("https://akademia108.pl/api/social-app/follows/follow", {
+        leader_id: id
+      })
+      .then((res) => {
+        console.log(res);
+      })
+
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const unfollow = (id) => {
+    axios
+      .post("https://akademia108.pl/api/social-app/follows/disfollow", {
+        leader_id: id,
+      })
+      .then((res) => {
+        console.log(res);
+        setdoesUserFollow(false);
+      })
+
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const handleFollowClick = () => {
+    if (doesUserFollow) {
+      unfollow(props.user.id);
+    } else {
+      follow(props.user.id);
+      setdoesUserFollow(true)
+    }
+  };
+
+  const likePost = (id, isLiked) => {
     axios
       .post(
         "https://akademia108.pl/api/social-app/post/" +
@@ -25,7 +63,7 @@ const Post = (props) => {
       .then(() => {
         setLikesCount(likesCount + (isLiked ? -1 : 1));
         setdoesUserLike(!isLiked);
-      }));
+      });
   };
 
   return (
@@ -37,15 +75,22 @@ const Post = (props) => {
         <div className="postMeta">
           <div className="author">{props.post.user.username}</div>
           <div className="date">{props.post.created_at.substring(0, 10)}</div>
+          {props.user && (
+            <button
+              className="btn"
+              onClick={() => handleFollowClick()}
+            >
+              {doesUserFollow ? "Unfollow" : "Follow"}
+            </button>
+          )}
           <div className="postContent">{props.post.content}</div>
           <div className="likes">
-
             {props.user && (
               <button
                 className="btn"
                 onClick={() => likePost(props.post.id, doesUserLike)}
               >
-                {doesUserLike? "Dislike" : "Like"}
+                {doesUserLike ? "Dislike" : "Like"}
               </button>
             )}
             {likesCount}

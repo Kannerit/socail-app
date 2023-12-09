@@ -4,6 +4,7 @@ import "./FollowRecommendations.css";
 
 const FollowRecommendations = (props) => {
   const [recommendations, setRecommendations] = useState([]);
+  
 
   const getRecommendations = () => {
     axios
@@ -21,10 +22,10 @@ const FollowRecommendations = (props) => {
     getRecommendations();
   }, []);
 
-  const follow = (id) => {
+  const followRecommendation = (id) => {
     axios
       .post("https://akademia108.pl/api/social-app/follows/follow", {
-        user_id: id
+        leader_id: id
       })
       .then((res) => {
         console.log(res);
@@ -45,12 +46,14 @@ const FollowRecommendations = (props) => {
             <div className="Recommendation" key={recommendation.id}>
               <img src={recommendation.avatar_url} className="AvatarImg" />
               <h3>{recommendation.username}</h3>
-              <button className="follow-btn" onClick={()=> follow()}>Follow</button>
+              <button className="follow-rec-btn" onClick={()=> followRecommendation(recommendation.id)} >Follow</button>
             </div>
         
           );
         })}
+        
       </div>
+      
     </div>
   );
 };
