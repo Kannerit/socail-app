@@ -1,0 +1,38 @@
+.popup {
+  position: fixed;
+  display: block;
+  width: 400px;
+  background-color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 15px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.PopupSign {
+  position: static;
+  top: 12px;
+  right: 100px;
+}
+
+.popup .closeBtn {
+  position: absolute;
+  top: 12px;
+  right: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: rgb(101, 133, 164);
+}
+
+.popup h4 {
+  position: relative;
+  font-weight: 400;
+}
+
+.popup .link {
+  font-weight: 600;
+  text-decoration: none;
+}

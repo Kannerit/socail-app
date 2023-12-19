@@ -3,6 +3,9 @@ import AppRoutes from './routes/AppRoutes';
 import './App.css';
 import AppNav from './components/AppNav';
 import { useState } from 'react';
+import Popup from './views/Popup';
+import LoginForm from './components/LoginForm';
+
 
 
 function App() {
@@ -15,6 +18,7 @@ function App() {
     <div className="App">
       <AppNav user={user} setUser={setUser}/>
       <AppRoutes user={user} setUser={setUser}/>
+      <Popup user={user} setUser={setUser}/>
     </div>
   );
 }

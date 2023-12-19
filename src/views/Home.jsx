@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Post from "../components/Post";
+import Popup from "./Popup";
 import "./Home.css";
 import AddPost from "../components/AddPost";
 import FollowRecommendations from "../components/FollowRecomendations";
@@ -14,7 +15,6 @@ const Home = (props) => {
 
       .then((req) => {
         setPosts(req.data);
-        console.log(req);
       })
       .catch((error) => {
         console.error(error);
@@ -67,24 +67,23 @@ const Home = (props) => {
   return (
     <div className="home">
       <div className="postList">
-    
+        <Popup />
         {props.user && <AddPost getPrevPosts={getPrevPosts} />}
-        {props.user && <FollowRecommendations user={props.user}/>}
+        {props.user && <FollowRecommendations user={props.user} getLatestPosts={getLatestPosts} posts={posts}/>}
         {posts.map((post) => {
           return (
-            <Post 
+            <Post
               post={post}
               user={props.user}
               key={post.id}
               deletePost={deletePost}
-              userId={props.user.id}
+              getLatestPosts={getLatestPosts}
             />
           );
         })}
         <button className="btn loadMore" onClick={getNextPosts}>
           Load more
         </button>
-       
       </div>
     </div>
   );

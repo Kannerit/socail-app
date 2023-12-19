@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./FollowRecommendations.css";
 
+
 const FollowRecommendations = (props) => {
   const [recommendations, setRecommendations] = useState([]);
-  
+
+  // console.log(recommendations);
 
   const getRecommendations = () => {
     axios
@@ -20,15 +22,17 @@ const FollowRecommendations = (props) => {
 
   useEffect(() => {
     getRecommendations();
-  }, []);
+  }, [props.posts]);
 
   const followRecommendation = (id) => {
     axios
       .post("https://akademia108.pl/api/social-app/follows/follow", {
-        leader_id: id
+        leader_id: id,
       })
       .then((res) => {
         console.log(res);
+        getRecommendations();
+        props.getLatestPosts();
       })
 
       .catch((error) => {
@@ -36,24 +40,25 @@ const FollowRecommendations = (props) => {
       });
   };
 
-
   return (
     <div className="MainContainer">
-         <h2 className="RecHeader">Recommendations</h2>
+      <h2 className="RecHeader">Recommendations</h2>
       <div className="Recommendations">
         {recommendations.map((recommendation) => {
           return (
             <div className="Recommendation" key={recommendation.id}>
               <img src={recommendation.avatar_url} className="AvatarImg" />
               <h3>{recommendation.username}</h3>
-              <button className="follow-rec-btn" onClick={()=> followRecommendation(recommendation.id)} >Follow</button>
+              <button
+                className="follow-rec-btn"
+                onClick={() => followRecommendation(recommendation.id)}
+              >
+                Follow
+              </button>
             </div>
-        
           );
         })}
-        
       </div>
-      
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./Post.css";
 import axios from "axios";
+import FollowRecommendations from "../components/FollowRecomendations";
 
 
 const Post = (props) => {
@@ -11,22 +12,6 @@ const Post = (props) => {
       .length !== 0
   );
 
-  const [doesUserFollow, setdoesUserFollow] = useState(true);
-
-  const follow = (id) => {
-    axios
-      .post("https://akademia108.pl/api/social-app/follows/follow", {
-        leader_id: id
-      })
-      .then((res) => {
-        console.log(res);
-      })
-
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-
   const unfollow = (id) => {
     axios
       .post("https://akademia108.pl/api/social-app/follows/disfollow", {
@@ -34,7 +19,7 @@ const Post = (props) => {
       })
       .then((res) => {
         console.log(res);
-        setdoesUserFollow(false);
+        props.getLatestPosts();
       })
 
       .catch((error) => {
@@ -42,14 +27,6 @@ const Post = (props) => {
       });
   };
 
-  const handleFollowClick = () => {
-    if (doesUserFollow) {
-      unfollow(props.user.id);
-    } else {
-      follow(props.user.id);
-      setdoesUserFollow(true)
-    }
-  };
 
   const likePost = (id, isLiked) => {
     axios
@@ -75,12 +52,13 @@ const Post = (props) => {
         <div className="postMeta">
           <div className="author">{props.post.user.username}</div>
           <div className="date">{props.post.created_at.substring(0, 10)}</div>
-          {props.user && (
+          {props.user && props.user?.username !== props.post.user.username && (
             <button
               className="btn"
-              onClick={() => handleFollowClick()}
+              onClick={() => unfollow(props.post.user.id)}
             >
-              {doesUserFollow ? "Unfollow" : "Follow"}
+              Unfollow
+              {/* {doesUserFollow ? "Unfollow" : "Follow"} */}
             </button>
           )}
           <div className="postContent">{props.post.content}</div>
