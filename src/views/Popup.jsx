@@ -2,24 +2,31 @@ import LoginForm from "../components/LoginForm";
 import "./Popup.css";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Navigate } from "react-router-dom";
 
 const Popup = (props) => {
   const [popupVisible, setPopupVisible] = useState(false);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      setPopupVisible(true);
-    }, 3000);
+    if (!props.user) {
+      const timeout = setTimeout(() => {
+        setPopupVisible(true);
+      }, 5000);
 
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, []);
+      return () => {
+        clearTimeout(timeout);
+      };
+    }
+  }, [props.user]);
 
   const closePopup = () => {
     setPopupVisible(false);
   };
+
+  if(props.user) {
+    return null;
+  }
+
+  
   return (
     <div>
       {popupVisible && (

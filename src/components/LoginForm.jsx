@@ -41,8 +41,9 @@ const LoginForm = (props) => {
         } else {
           setLoginMessage("");
           props.setUser(res.data);
-         
           localStorage.setItem("user", JSON.stringify(res.data));
+          props.closePopup();
+          console.log(props.closePopup + "It should be closing now but it's not >:(");
         }
       })
       .catch((error) => {
