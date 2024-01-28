@@ -21,7 +21,6 @@ const LoginForm = (props) => {
     });
   };
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -31,7 +30,6 @@ const LoginForm = (props) => {
         password: formData.password,
       })
       .then((res) => {
-   
         if (Array.isArray(res.data.username)) {
           setLoginMessage(res.data.username[0]);
         } else if (Array.isArray(res.data.password)) {
@@ -43,7 +41,6 @@ const LoginForm = (props) => {
           props.setUser(res.data);
           localStorage.setItem("user", JSON.stringify(res.data));
           props.closePopup();
-          console.log(props.closePopup + "It should be closing now but it's not >:(");
         }
       })
       .catch((error) => {
@@ -74,8 +71,6 @@ const LoginForm = (props) => {
       </form>
     </div>
   );
-}
+};
 
 export default LoginForm;
-
-

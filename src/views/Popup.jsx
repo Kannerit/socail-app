@@ -3,33 +3,18 @@ import "./Popup.css";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+
 const Popup = (props) => {
-  const [popupVisible, setPopupVisible] = useState(false);
-
-  useEffect(() => {
-    if (!props.user) {
-      const timeout = setTimeout(() => {
-        setPopupVisible(true);
-      }, 5000);
-
-      return () => {
-        clearTimeout(timeout);
-      };
-    }
-  }, [props.user]);
-
+  console.log('pupup visible:', props.popupVisible);
+  
   const closePopup = () => {
-    setPopupVisible(false);
+    props.setPopupVisible(false);
   };
 
-  if(props.user) {
-    return null;
-  }
 
-  
   return (
     <div>
-      {popupVisible && (
+      {props.popupVisible && (
         <div className="popup">
           <button className="closeBtn" onClick={() => closePopup()}>
             x
