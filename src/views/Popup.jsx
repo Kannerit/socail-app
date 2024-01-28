@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 
 
 const Popup = (props) => {
-  console.log('pupup visible:', props.popupVisible);
   
   const closePopup = () => {
     props.setPopupVisible(false);

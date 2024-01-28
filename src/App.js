@@ -16,7 +16,6 @@ function App(props) {
   useEffect(() => {
     if (!props.user) {
       const timeout = setTimeout(() => {
-        console.log("setting popup visible");
         setPopupVisible(true);
       }, 5000);
 
